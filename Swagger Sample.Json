@@ -1,0 +1,203 @@
+{
+    "swagger": "2.0",
+    "info": {
+    "title": "Notification VAS",
+        "description": "Specification for the Froter Express RESTful web service for VAS forter \nfraud checks on a list of Items\n",
+        "version": "1.0.0",
+        "contact": {
+        "name": "Vantiv Inc.",
+            "url": "https://apideveloper.vantiv.com/",
+            "email": "apiportalsupport@vantiv.com"
+    },
+    "termsOfService": "NEEDS ATTENTION"
+},
+    "schemes": [
+    "https"
+],
+    "consumes": [
+    "application/json"
+],
+    "produces": [
+    "application/json"
+],
+    "parameters": {
+    "Authorization": {
+        "name": "Authorization",
+            "in": "header",
+            "description": "Vantiv license for authentication in the form VANTIV license=\"<License key>\"\n",
+            "required": true,
+            "type": "string"
+    }
+},
+    "paths": {
+    "/immunity": {
+        "x-swagger-router-controller": "controller",
+            "post": {
+            "tags": [
+                "immunity"
+            ],
+                "description": "Notification endpoint - from here we will be hitting multiple notifications\nfor immunity and the such\n",
+                "operationId": "immunity",
+                "parameters": [
+                {
+                    "$ref": "#/parameters/Authorization"
+                },
+                {
+                    "name": "request",
+                    "in": "body",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/ReqBody"
+                    }
+                }
+            ],
+                "responses": {
+                "200": {
+                    "description": "Success",
+                        "schema": {
+                        "$ref": "#/definitions/SuccessResponse"
+                    }
+                },
+                "default": {
+                    "description": "Error",
+                        "schema": {
+                        "$ref": "#/definitions/ErrorResponse"
+                    }
+                }
+            }
+        }
+    }
+},
+    "definitions": {
+    "SuccessResponse": {
+        "required": [
+            "message"
+        ],
+            "properties": {
+            "message": {
+                "type": "string"
+            },
+            "age": {
+                "type": "number"
+            }
+        }
+    },
+    "ErrorResponse": {
+        "required": [
+            "message"
+        ],
+            "properties": {
+            "message": {
+                "type": "string"
+            }
+        }
+    },
+    "ReqBody": {
+        "type": "object",
+            "required": [
+            "OrderId",
+            "Type"
+        ],
+            "properties": {
+            "ElapsedTime": {
+                "type": "string"
+            },
+            "Environment": {
+                "type": "string"
+            },
+            "MessageDateTime": {
+                "type": "string"
+            },
+            "MessageID": {
+                "type": "string"
+            },
+            "TransactionID": {
+                "type": "string"
+            },
+            "EndUserID": {
+                "type": "string"
+            },
+            "Source": {
+                "type": "object",
+                    "properties": {
+                    "Host": {
+                        "type": "string"
+                    },
+                    "SystemName": {
+                        "type": "string"
+                    },
+                    "SubSystemName": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Target": {
+                "type": "object",
+                    "properties": {
+                    "Host": {
+                        "type": "string"
+                    },
+                    "SystemName": {
+                        "type": "string"
+                    },
+                    "SubSystemName": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Payload": {
+                "type": "object",
+                    "properties": {
+                    "ObjectName": {
+                        "type": "string"
+                    },
+                    "ObjectOperation": {
+                        "type": "string"
+                    },
+                    "Version": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Fact": {
+                "type": "object",
+                    "properties": {
+                    "Fact": {
+                        "type": "object",
+                            "properties": {
+                            "Field": {
+                                "type": "string"
+                            },
+                            "Value": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "ServiceType": {
+                "type": "string",
+                    "default": "Immunity"
+            },
+            "OrderId": {
+                "type": "string"
+            },
+            "Type": {
+                "type": "string"
+            },
+            "Action": {
+                "type": "string"
+            },
+            "Score": {
+                "type": "string"
+            },
+            "Reason": {
+                "type": "string"
+            },
+            "Message": {
+                "type": "string"
+            }
+        }
+    }
+}
+}
